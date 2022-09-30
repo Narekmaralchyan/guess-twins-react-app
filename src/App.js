@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import GuesTwinApp from './Components/GuesTwinApp';
+import GameManage from './Components/GameManage';
+import WinGame from './Components/Win';
+import { useState } from 'react';
 
 function App() {
+  const [started,setStart] = useState(false)
+  const [win,setWin] = useState(false)
+  
+  function startGame(){
+    setStart(true)
+    setWin(false)
+  }
+  function restartGame(){
+    setStart(false)
+    setTimeout(()=>{
+      startGame(true)
+    })
+  }
+  function winGame (){
+    setWin(true)
+  }
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <GameManage 
+          started={started} 
+          startGame={startGame}
+          restartGame={restartGame}
+      />
+      
+      {started?win?<WinGame start={startGame}/>:<GuesTwinApp winGame={winGame}/>:""}
     </div>
   );
 }
