@@ -67,7 +67,7 @@ function show(name,value){
             }))
             setTimeout(()=>{
                 hide(openedCards[length-1].name,value)
-            },500)
+            },1000)
         }
     }
 }
